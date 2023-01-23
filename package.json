@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "An authorization api rest made with JWT",
   "main": "src/index.js",
   "scripts": {
     "build": "babel src --out-dir build",
@@ -9,7 +9,7 @@
     "dev": "nodemon src/index.js --exec babel-node"
   },
   "keywords": [],
-  "author": "",
+  "author": "Tomás Yovino",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
