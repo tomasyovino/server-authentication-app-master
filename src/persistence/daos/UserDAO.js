@@ -1,5 +1,6 @@
 import DAOContainer from "../DAOContainer";
 import { UserModel } from "../../models/User";
+import RoleDAO from "./RoleDAO";
 
 let instance = null;
 
@@ -16,17 +17,26 @@ class UserDAO extends DAOContainer {
     };
 
     async createUser(username, email, password, roles, firstName, lastName, phone) {
+        const roleDAO = RoleDAO.createInstance();
+        let foundRoles;
+        
         const newUser = new UserModel({
             username,
             email,
             password: await UserModel.encryptPassword(password),
-            roles,
             firstName,
             lastName,
             phone
         });
-        const savedUser = await newUser.save();
+        
+        if(roles) {
+            foundRoles = await roleDAO.findRoles(roles);
+        } else {
+            foundRoles = await roleDAO.findRoles();
+        };
+        newUser.roles = foundRoles.map(role => role._id);
 
+        const savedUser = await newUser.save();
         return savedUser;
     };
 
