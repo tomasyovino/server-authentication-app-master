@@ -34,14 +34,20 @@ class UserDAO extends DAOContainer {
         } else {
             foundRoles = await roleDAO.findRoles();
         };
-        newUser.roles = foundRoles.map(role => role._id);
+        newUser.roles = await foundRoles.map(role => role._id);
 
         const savedUser = await newUser.save();
         return savedUser;
     };
 
-    async findUser(username, email) {
-        const user = await UserModel.find({$or: [{ username }, { email }]});
+    async findUserByParam(param) {
+        const user = await UserModel.findOne({$or: [{ username: param }, { email: param }]}).populate("roles");
+        return user;
+    };
+
+    async compareUserPassword(postedPassword, userPassword) {
+        const matchPassword = await UserModel.comparePassword(postedPassword, userPassword);
+        return matchPassword;
     };
 };
 
