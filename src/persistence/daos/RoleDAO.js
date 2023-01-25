@@ -34,6 +34,11 @@ class RoleDAO extends DAOContainer {
         };
         return foundRoles;
     };
+
+    async findRolesByUser(userRoles) {
+        const roles = await RoleModel.find({ _id: { $in: userRoles } });
+        return roles;
+    };
 };
 
 export default RoleDAO;
