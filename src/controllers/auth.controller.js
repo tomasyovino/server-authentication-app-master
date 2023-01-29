@@ -5,9 +5,10 @@ import config from "../utils/config";
 export const registerUserController = async (req, res) => {
     try {
         const { username, email, password, firstName, lastName, phone } = req.body;
+        const imgUrl = req.file.path;
         let roles = undefined;
 
-        const user = await createUser(username, email, password, roles, firstName, lastName, phone);
+        const user = await createUser(username, email, password, roles, firstName, lastName, imgUrl, phone);
         const token = jwt.sign({ id: user._id }, config.secret, {
             expiresIn: 86400 // 24 hours
         });

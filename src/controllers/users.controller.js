@@ -33,7 +33,8 @@ export const getUserByIdController = async (req, res) => {
 export const createUserController = async (req, res) => {
     try {
         const { username, email, password, roles, firstName, lastName, phone } = req.body;
-        const user = await createUser(username, email, password, roles, firstName, lastName, phone);
+        const imgUrl = req.file.path;
+        const user = await createUser(username, email, password, roles, firstName, lastName, imgUrl, phone);
 
         const token = jwt.sign({ id: user._id }, config.secret, {
             expiresIn: 86400 // 24 hours

@@ -16,7 +16,7 @@ class UserDAO extends DAOContainer {
         return instance;
     };
 
-    async createUser(username, email, password, roles, firstName, lastName, phone) {
+    async createUser(username, email, password, roles, firstName, lastName, imgUrl, phone) {
         const roleDAO = RoleDAO.createInstance();
         let foundRoles;
         
@@ -26,6 +26,7 @@ class UserDAO extends DAOContainer {
             password: await UserModel.encryptPassword(password),
             firstName,
             lastName,
+            imgUrl,
             phone
         });
         
