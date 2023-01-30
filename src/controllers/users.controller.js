@@ -33,7 +33,7 @@ export const getUserByIdController = async (req, res) => {
 export const createUserController = async (req, res) => {
     try {
         const { username, email, password, roles, firstName, lastName, phone } = req.body;
-        const imgUrl = req.file.path;
+        let imgUrl = req.file ? req.file.path : "https://res.cloudinary.com/dtyrld6tv/image/upload/v1675038292/authenticator/1946429_ytb3wg.png";
         const user = await createUser(username, email, password, roles, firstName, lastName, imgUrl, phone);
 
         const token = jwt.sign({ id: user._id }, config.secret, {
@@ -49,7 +49,13 @@ export const createUserController = async (req, res) => {
 
 export const updateUserByIdController = async (req, res) => {
     try {
-        const user = await updateUserById(req.params.id, req.body);
+        let user;
+        if (req.file) {
+            user = await updateUserById(req.params.id, { imgUrl: req.file.path });
+        } else {
+            user = await updateUserById(req.params.id, req.body);
+        };
+
         if(user) {
             res.status(200).json(user);
         } else {

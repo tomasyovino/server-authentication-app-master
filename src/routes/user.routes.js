@@ -7,7 +7,7 @@ const userRouter = Router();
 userRouter.get('/', usersCtrl.getUsersController);
 userRouter.get('/:id', usersCtrl.getUserByIdController);
 userRouter.post('/', [verifyToken, isAdmin, checkUsernameOrEmailExists, checkRolestExists, upload.single('image')], usersCtrl.createUserController);
-userRouter.put('/:id', [verifyToken, isModerator, isAdmin], usersCtrl.updateUserByIdController);
+userRouter.put('/:id', [verifyToken, isModerator, isAdmin, upload.single('image')], usersCtrl.updateUserByIdController);
 userRouter.delete('/:id', [verifyToken, isModerator, isAdmin], usersCtrl.deleteUserByIdController);
 
 export default userRouter;

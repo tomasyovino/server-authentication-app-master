@@ -5,7 +5,7 @@ import config from "../utils/config";
 export const registerUserController = async (req, res) => {
     try {
         const { username, email, password, firstName, lastName, phone } = req.body;
-        const imgUrl = req.file.path;
+        let imgUrl = req.file ? req.file.path : "https://res.cloudinary.com/dtyrld6tv/image/upload/v1675038292/authenticator/1946429_ytb3wg.png";
         let roles = undefined;
 
         const user = await createUser(username, email, password, roles, firstName, lastName, imgUrl, phone);
