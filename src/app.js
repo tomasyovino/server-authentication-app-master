@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import morgan from "morgan";
 import pkg from "../package.json";
 import { createRoles, createAdmin } from "./libs/initialSetup";
@@ -9,6 +10,7 @@ createRoles();
 createAdmin();
 
 app.set('pkg', pkg);
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use('/api', router);
