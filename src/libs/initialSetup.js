@@ -34,7 +34,8 @@ export const createAdmin = async () => {
             config.admin_password, 
             roles, 
             "admin", 
-            "admin", 
+            "admin",
+            config.admin_imgUrl,
             4242424242
         );
     
