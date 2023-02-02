@@ -28,7 +28,7 @@ export const createUser = async (username, email, password, roles, firstName, la
 };
 
 export const updateUserById = async (id, obj) => {
-    const user = await userDAO.updateElementById(id, obj);
+    const user = await userDAO.updateUser(id, obj);
     return user;
 };
 

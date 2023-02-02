@@ -41,6 +41,23 @@ class UserDAO extends DAOContainer {
         return savedUser;
     };
 
+    async updateUser(id, obj) {
+        const { username, email, password, firstName, lastName, imgUrl, phone} = obj;
+        const userUpdated = await UserModel.findByIdAndUpdate(id, {
+            $set: { 
+                username, 
+                email, 
+                password: await UserModel.encryptPassword(password),
+                firstName,
+                lastName,
+                imgUrl,
+                phone
+            },
+        }, { new: true });
+
+        return userUpdated;
+    };
+
     async findUserByParam(param) {
         const user = await UserModel.findOne({$or: [{ username: param }, { email: param }]}).populate("roles");
         return user;
