@@ -51,7 +51,8 @@ export const updateUserByIdController = async (req, res) => {
     try {
         let user;
         if (req.file) {
-            user = await updateUserById(req.params.id, { imgUrl: req.file.path });
+            req.body.imgUrl = req.file.path;
+            user = await updateUserById(req.params.id, req.body);
         } else {
             user = await updateUserById(req.params.id, req.body);
         };
