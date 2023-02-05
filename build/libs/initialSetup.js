@@ -76,7 +76,7 @@ var createAdmin = /*#__PURE__*/function () {
         case 9:
           roles = ["admin", "moderator"];
           _context2.next = 12;
-          return (0, _users.createUser)(_config["default"].admin_username, _config["default"].admin_email, _config["default"].admin_password, roles, "admin", "admin", 4242424242);
+          return (0, _users.createUser)(_config["default"].admin_username, _config["default"].admin_email, _config["default"].admin_password, roles, "admin", "admin", _config["default"].admin_imgUrl, 4242424242);
         case 12:
           newUser = _context2.sent;
           console.log("New user created: ".concat(newUser.email));

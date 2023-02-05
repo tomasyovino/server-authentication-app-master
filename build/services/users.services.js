@@ -128,7 +128,7 @@ var updateUserById = /*#__PURE__*/function () {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
           _context6.next = 2;
-          return userDAO.updateElementById(id, obj);
+          return userDAO.updateUser(id, obj);
         case 2:
           user = _context6.sent;
           return _context6.abrupt("return", user);

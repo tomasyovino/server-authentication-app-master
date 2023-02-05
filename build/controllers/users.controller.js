@@ -145,23 +145,22 @@ var updateUserByIdController = /*#__PURE__*/function () {
         case 0:
           _context4.prev = 0;
           if (!req.file) {
-            _context4.next = 7;
+            _context4.next = 8;
             break;
           }
-          _context4.next = 4;
-          return (0, _users.updateUserById)(req.params.id, {
-            imgUrl: req.file.path
-          });
-        case 4:
-          user = _context4.sent;
-          _context4.next = 10;
-          break;
-        case 7:
-          _context4.next = 9;
+          req.body.imgUrl = req.file.path;
+          _context4.next = 5;
           return (0, _users.updateUserById)(req.params.id, req.body);
-        case 9:
+        case 5:
           user = _context4.sent;
+          _context4.next = 11;
+          break;
+        case 8:
+          _context4.next = 10;
+          return (0, _users.updateUserById)(req.params.id, req.body);
         case 10:
+          user = _context4.sent;
+        case 11:
           ;
           if (user) {
             res.status(200).json(user);
@@ -171,22 +170,22 @@ var updateUserByIdController = /*#__PURE__*/function () {
             });
           }
           ;
-          _context4.next = 19;
+          _context4.next = 20;
           break;
-        case 15:
-          _context4.prev = 15;
+        case 16:
+          _context4.prev = 16;
           _context4.t0 = _context4["catch"](0);
           console.log(_context4.t0);
           res.status(500).json({
             message: "Internal server error: Error updating user"
           });
-        case 19:
-          ;
         case 20:
+          ;
+        case 21:
         case "end":
           return _context4.stop();
       }
-    }, _callee4, null, [[0, 15]]);
+    }, _callee4, null, [[0, 16]]);
   }));
   return function updateUserByIdController(_x7, _x8) {
     return _ref4.apply(this, arguments);

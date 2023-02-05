@@ -102,14 +102,67 @@ var UserDAO = /*#__PURE__*/function (_DAOContainer) {
       return createUser;
     }()
   }, {
-    key: "findUserByParam",
+    key: "updateUser",
     value: function () {
-      var _findUserByParam = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(param) {
-        var user;
+      var _updateUser = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(id, obj) {
+        var userUpdated, password;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.next = 2;
+              if (!obj.password) {
+                _context2.next = 15;
+                break;
+              }
+              password = obj.password;
+              _context2.t0 = _User.UserModel;
+              _context2.t1 = id;
+              _context2.next = 6;
+              return _User.UserModel.encryptPassword(password);
+            case 6:
+              _context2.t2 = _context2.sent;
+              _context2.t3 = {
+                password: _context2.t2
+              };
+              _context2.t4 = {
+                $set: _context2.t3
+              };
+              _context2.t5 = {
+                "new": true
+              };
+              _context2.next = 12;
+              return _context2.t0.findByIdAndUpdate.call(_context2.t0, _context2.t1, _context2.t4, _context2.t5);
+            case 12:
+              userUpdated = _context2.sent;
+              _context2.next = 18;
+              break;
+            case 15:
+              _context2.next = 17;
+              return this.updateElementById(id, obj);
+            case 17:
+              userUpdated = _context2.sent;
+            case 18:
+              ;
+              return _context2.abrupt("return", userUpdated);
+            case 20:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, this);
+      }));
+      function updateUser(_x9, _x10) {
+        return _updateUser.apply(this, arguments);
+      }
+      return updateUser;
+    }()
+  }, {
+    key: "findUserByParam",
+    value: function () {
+      var _findUserByParam = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(param) {
+        var user;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
               return _User.UserModel.findOne({
                 $or: [{
                   username: param
@@ -118,15 +171,15 @@ var UserDAO = /*#__PURE__*/function (_DAOContainer) {
                 }]
               }).populate("roles");
             case 2:
-              user = _context2.sent;
-              return _context2.abrupt("return", user);
+              user = _context3.sent;
+              return _context3.abrupt("return", user);
             case 4:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
-        }, _callee2);
+        }, _callee3);
       }));
-      function findUserByParam(_x9) {
+      function findUserByParam(_x11) {
         return _findUserByParam.apply(this, arguments);
       }
       return findUserByParam;
@@ -134,23 +187,23 @@ var UserDAO = /*#__PURE__*/function (_DAOContainer) {
   }, {
     key: "compareUserPassword",
     value: function () {
-      var _compareUserPassword = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(postedPassword, userPassword) {
+      var _compareUserPassword = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(postedPassword, userPassword) {
         var matchPassword;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
             case 0:
-              _context3.next = 2;
+              _context4.next = 2;
               return _User.UserModel.comparePassword(postedPassword, userPassword);
             case 2:
-              matchPassword = _context3.sent;
-              return _context3.abrupt("return", matchPassword);
+              matchPassword = _context4.sent;
+              return _context4.abrupt("return", matchPassword);
             case 4:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
-        }, _callee3);
+        }, _callee4);
       }));
-      function compareUserPassword(_x10, _x11) {
+      function compareUserPassword(_x12, _x13) {
         return _compareUserPassword.apply(this, arguments);
       }
       return compareUserPassword;

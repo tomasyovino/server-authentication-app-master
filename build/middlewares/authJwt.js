@@ -19,46 +19,50 @@ var verifyToken = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
-          token = req.headers["x-access-token"];
+          if (!(req.headers.authorization && req.headers.authorization.startsWith('Bearer'))) {
+            _context.next = 19;
+            break;
+          }
+          _context.prev = 1;
+          token = req.headers.authorization.split(' ')[1];
           if (token) {
-            _context.next = 4;
+            _context.next = 5;
             break;
           }
           return _context.abrupt("return", res.status(403).json({
             message: "No token provided"
           }));
-        case 4:
+        case 5:
           decoded = _jsonwebtoken["default"].verify(token, _config["default"].secret);
           req.userId = decoded.id;
-          _context.next = 8;
+          _context.next = 9;
           return (0, _users.getUserById)(req.userId);
-        case 8:
+        case 9:
           user = _context.sent;
           if (user) {
-            _context.next = 11;
+            _context.next = 12;
             break;
           }
           return _context.abrupt("return", res.status(404).json({
             message: "User not found"
           }));
-        case 11:
+        case 12:
           if (user) next();
-          _context.next = 17;
+          _context.next = 18;
           break;
-        case 14:
-          _context.prev = 14;
-          _context.t0 = _context["catch"](0);
+        case 15:
+          _context.prev = 15;
+          _context.t0 = _context["catch"](1);
           return _context.abrupt("return", res.status(401).json({
             message: "Unauthorized!"
           }));
-        case 17:
-          ;
         case 18:
+          ;
+        case 19:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 14]]);
+    }, _callee, null, [[1, 15]]);
   }));
   return function verifyToken(_x, _x2, _x3) {
     return _ref.apply(this, arguments);
